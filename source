@@ -1,0 +1,128 @@
+
+" Agrega más plugins según sea necesario
+let g:python3_host_prog = '/home/yulesky/.config/bin/python3'
+" Configuración básica
+set number          " Muestra números de línea
+set relativenumber   " Muestra números de línea relativos
+set autoindent      " Indentación automática
+set tabstop=4       " Tamaño de tabulación
+set shiftwidth=4    " Ancho de indentación
+set expandtab       " Usa espacios en lugar de tabulaciones
+set softtabstop=4   " Espacios antes y después de un tabulación
+set wrap            " Habilita envoltura de texto
+set linebreak       " Inserta saltos de línea en palabras largas
+set clipboard+=unnamedplus " Copia al portapapeles del sistehub.com/preservim/nerdtree
+
+
+
+
+
+call plug#begin('~/.config/nvim/plugged')
+
+Plug 'itchyny/lightline.vim'
+
+Plug 'neovim/nvim-lspconfig'
+Plug 'hrsh7th/nvim-cmp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
+Plug 'folke/which-key.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+Plug 'kyazdani42/nvim-tree.lua'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'vim-airline/vim-airline-themes'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-surround'
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }
+
+ "" Airline" (Optional) Multi-entry selection UI.
+Plug 'vim-airline/vim-airline'
+" Plugins relacionados con LSP y autocompletado
+Plug 'neovim/nvim-lspconfig'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+" Plugins para navegación y exploración
+Plug 'kyazdani42/nvim-tree.lua'
+Plug 'junegunn/fzf'
+Plug 'nvim-telescope/telescope.nvim'
+
+Plug 'tpope/vim-surround'
+
+
+" Plugin para temas de color
+Plug 'morhetz/gruvbox'
+Plug 'joshdick/onedark.vim'
+
+" Plugins para JavaScript y TypeScript
+Plug 'pangloss/vim-javascript'
+Plug 'leafgarland/typescript-vim'
+Plug 'Quramy/vim-js-pretty-template'
+Plug 'Shougo/vimproc.vim', {'do' : 'make'}
+Plug 'Quramy/tsuquyomi'
+Plug 'HerringtonDarkholme/yats.vim'
+Plug 'maxmellon/vim-jsx-pretty'
+Plug 'mattn/emmet-vim'
+
+" Snippets para JavaScript
+Plug 'Yggdroot/indentLine'
+Plug 'scrooloose/nerdtree'
+
+call plug#end()
+
+
+"NerdTree Config
+nnoremap <silent> <F2> :NERDTreeFind<CR>
+nnoremap <silent> <F3> :NERDTreeToggle<CR>
+
+
+"Gruvbox config
+set background=dark
+let g:gruvbox_background='medium'
+colorscheme gruvbox
+"LSP conf
+lua <<EOF
+
+EOF
+
+"Coc Config
+
+source /home/yulesky/.config/nvim/Coc_conf.vim
+let g:airline_section_a = '%{escape(coc#status(), "%")}'
+
+
+
+"Emmet conf
+
+let g:user_emmet_mode='n'
+
+let g:user_emmet_leader_key=','
+
+let g:user_emmet_settings={
+\ 'javascript':{
+\ 'extends':'jsx'
+        \ }
+\ }
+"prettier conf
+command! -nargs=0 Prettier :CocCommand prettier.formatFile
+nnoremap <C-D> :Prettier<CR>
+
+"config commentary
+nnoremap <space>/ :Commentary<CR>
+vnoremap <space>/ :Commentary<CR>
+
+"Airline conf
+" Habilita la barra de estad
+let g:airline#extensions#tabline#enabled = 1
+
+" Muestra los números de buffer en la barra de pestañas
+let g:airline#extensions#tabline#buffer_nr_show = 1
+
+" Configura las teclas de acceso rápido para navegar entre pestañas
+nnoremap <<F14>> :tabnext<CR>
+nnoremap <<F15>> :tabprev<CR>
+
+
+" Required for operations modifying multiple buffers like rename.
+
